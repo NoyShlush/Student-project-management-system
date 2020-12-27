@@ -1,0 +1,47 @@
+{{define "title"}}רשימת פרויקטים ממתינים לאישור{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+<h1 align="right">:ארכיון פרויקטים </h1>
+<br>
+<p align="right">כאן תוכלו למצאו השראה לפרויקט גמר שלכם</p>
+<br>
+<!-- Search form -->
+<div class="row">
+	<div class="col-sm-8">
+        <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+	</div>
+	<div class="col-sm-4">
+        <form method="post" class="form-inline mr-auto">
+            <button class="btn btn-outline-primary" type="submit">חיפוש</button>
+            <input id="query" name = "query" class="form-control mr-sm-2" type="text" placeholder="חיפוש" aria-label="Search" dir="rtl">
+            <input type="hidden" name="token" value="{{.token}}">
+         </form>
+	</div>
+</div>
+<br>
+{{if .archiveProjects}}
+  <div class="panel-group">
+    <div class="panel panel-primary">
+        {{range $n := .archiveProjects}}
+        <div class="panel-heading" align="right">{{.project.project.ProjectName}}</div>
+            <div class="panel-body">
+                <p dir="rtl"><span class="fa fa-users"></span> {{.project.supervisor}}</p>
+                <p dir="rtl"><span class="glyphicon glyphicon-user"></span> {{.project.students}}</p>
+                <p dir="rtl">{{.project.project.ShortDescription}}</p>
+                <a title="פרטים נוספים" class="btn btn-outline-primary btn-space" role="button" href="/archive/{{.project.project.ID}}">
+                <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> פרטים נוספים
+                </a>
+	        </div>
+	        {{end}}
+        </div>
+  </div>
+  {{else}}
+    <h1 align="center"><i>רשימה ריקה </i></h1>
+  {{end}}
+</div>
+</div>
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

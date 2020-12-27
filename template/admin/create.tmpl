@@ -1,0 +1,27 @@
+{{define "title"}}Create an Account{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+	<div class="page-header">
+		<h1 align="right">יצירת משתמש חדש</h1>
+	</div>
+	<form method="post">
+		<div class="form-group">
+			<label for="id_number">תעודת זהות</label>
+			<div><input type="text" class="form-control" id="id_number" name="id_number" maxlength="9" placeholder="תעודת זהות" value="{{.id_number}}" required/></div>
+		</div>
+		<div class="form-group">
+			<label for="email">דואר אלטרוני</label>
+			<div><input type="email" class="form-control" id="email" name="email" maxlength="48" placeholder="דואר אלטרוני" value="{{.email}}" required/></div>
+		</div>
+        <input type="hidden" name="token" value="{{.token}}">
+        <input type="submit" value="יצירת משתמש" class="btn btn-outline-primary" />
+        <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+
+	</form>
+</div>
+
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

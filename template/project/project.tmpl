@@ -1,0 +1,180 @@
+{{define "title"}}Update an User{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container text-right">
+    <h1 align="right">{{.project.ProjectName}}</h1>
+    <br>
+        <p dir="rtl"><b>מנחה: </b><span class="glyphicon glyphicon-user"></span>{{.supervisors.FirstName}} {{.supervisors.LastName}}</p>
+        <p dir="rtl"><b>סטודנטים: </b><span class="fa fa-users"></span> {{.students}}</p>
+        <p dir="rtl"><b>סטטוס פרויקט:</b>
+            {{if eq .project.StatusId 2}}
+            ממתין לאישור מנחה
+            {{else if eq .project.StatusId 3}}
+            ממתין לאישור מנהל פרויקטים
+            {{end}}
+        </p>
+        <p dir="rtl"><b>תיאור קצר:</b></p>
+        <p dir="rtl">{{.project.ShortDescription}}</p>
+        <p dir="rtl"><b>תיאור הפרויקט:</b></p>
+        <p dir="rtl">{{.project.Description}}</p>
+        {{if .approvalform}}
+        <br>
+        <h3 align="right">:טופס הצעת פרויקט</h3>
+        <p dir="rtl"><b>תקציר:</b></p>
+        <p dir="rtl">{{.approvalform.Synopses}}</p>
+        <p dir="rtl"><b>היקף הפרויקט:</b></p>
+        <p dir="rtl">{{.approvalform.ScopeOfTheProject}}</p>
+        <p dir="rtl"><b>תכונות ייחודיות:</b></p>
+        <p dir="rtl">{{.approvalform.UniqueFeatures}}</p>
+        <br>
+        {{end}}
+	    {{if .comments }}
+        <div class="row">
+            <div class="col-sm-7"></div>
+	        <div class="col-sm-5">
+	        <p dir="rtl"><b>הערות:</b></p>
+	        {{ range $comment := .comments }}
+            <p dir="rtl">{{$comment }}</p>
+            {{ end }}
+	        </div>
+	    </div>
+	    <br>
+	    {{end}}
+        <p dir="rtl"><b>נוצר ב: </b></span> {{.createdat}}</p>
+        <p dir="rtl"><b>עודכן ב: </b></span> {{.updatedat}}</p>
+        <br>
+        {{if eq .project.Type 1}}
+        <div class="row" >
+            <div class="col-sm-10"></div>
+            <div class="col-sm-2">
+            {{if eq .project.Type 1}}
+            {{if eq .project.StatusId 2}}
+	        <a title="Edit" class="btn btn-outline-primary" role="button" href="/project/edit/{{.project.ID}}">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ערוך פרויקט</a>
+            {{end}}
+            {{end}}
+            {{if eq .project.StatusId 3}}
+            <a title="Edit" class="btn btn-outline-primary" role="button" href="/project/approval/{{.project.ID}}">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span> טופס הצעה</a>
+            {{end}}
+            </div>
+        </div>
+        {{end}}
+        {{if eq .project.StatusId 3 }}
+        {{if eq .project.Type 2}}
+        <div class="row" >
+            <div class="col-sm-10"></div>
+            <div class="col-sm-2">
+                <a title="Edit" class="btn btn-outline-primary" role="button" href="/project/approval/{{.project.ID}}">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span> טופס הצעה</a>
+            </div>
+        </div>
+        {{end}}
+        {{end}}
+        {{if eq .project.StatusId 4}}
+            {{if eq .percentage 100}}
+                {{if eq .files.Book2PDF 0}}
+                <form style="display: inline;" enctype="multipart/form-data" action="/project/upload_file/part2_book_pdf" method="post">
+                    <button type="button" class="btn btn-outline-primary" id="clickme">
+                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span> PDF 'הגשת ספר חלק ב</button>
+                        <input type="file" name="File" id="uploadme" style="width: 0px; height: 0px; visibility: hidden; display: inline;" onchange="this.form.submit()"/>
+                        <input type="hidden" name="token" value="{{.token}}">
+                </form>
+                {{end}}
+                {{if eq .files.Book2WORD 0}}
+                <form style="display: inline;" enctype="multipart/form-data" action="/project/upload_file/part2_book_doc" method="post">
+                    <button type="button" class="btn btn-outline-primary" id="clickme1">
+                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span> WORD 'הגשת ספר חלק ב</button>
+                        <input type="file" name="File" id="uploadme1" style="width: 0px; height: 0px; visibility: hidden; display: inline;" onchange="this.form.submit()"/>
+                        <input type="hidden" name="token" value="{{.token}}">
+                </form>
+                {{end}}
+                {{if eq .files.Presentation2 0}}
+                <form style="display: inline;" enctype="multipart/form-data" action="/project/upload_file/part2_presentation" method="post">
+                    <button type="button" class="btn btn-outline-primary" id="clickme2">
+                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span> 'הגשת מצגת חלק ב</button>
+                        <input type="file" name="File" id="uploadme2" style="width: 0px; height: 0px; visibility: hidden; display: inline;" onchange="this.form.submit()"/>
+                        <input type="hidden" name="token" value="{{.token}}">
+                </form>
+                {{end}}
+                {{if eq .files.SourceCode 0}}
+                <form style="display: inline;" enctype="multipart/form-data" action="/project/upload_file/part2_code" method="post">
+                    <button type="button" class="btn btn-outline-primary" id="clickme3">
+                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span> הגשת קבצי קוד </button>
+                        <input type="file" name="File" id="uploadme3" style="width: 0px; height: 0px; visibility: hidden; display: inline;" onchange="this.form.submit()"/>
+                        <input type="hidden" name="token" value="{{.token}}">
+                </form>
+                {{end}}
+            {{else}}
+                {{if ge .percentage 50}}
+                    {{if eq .files.Book1PDF 0}}
+                    <form style="display: inline;" enctype="multipart/form-data" action="/project/upload_file/part1_book_pdf" method="post">
+                        <button type="button" class="btn btn-outline-primary" id="clickme4">
+                            <span class="glyphicon glyphicon-open" aria-hidden="true"></span> PDF 'הגשת ספר חלק א</button>
+                            <input type="file" name="File" id="uploadme4" style="width: 0px; height: 0px; visibility: hidden; display: inline;" onchange="this.form.submit()"/>
+                            <input type="hidden" name="token" value="{{.token}}">
+                    </form>
+                    {{end}}
+                    {{if eq .files.Book1WORD 0}}
+                    <form style="display: inline;" enctype="multipart/form-data" action="/project/upload_file/part1_book_doc" method="post">
+                    <button type="button" class="btn btn-outline-primary" id="clickme5">
+                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span> WORD 'הגשת ספר חלק א</button>
+                        <input type="file" name="File" id="uploadme5" style="width: 0px; height: 0px; visibility: hidden; display: inline;" onchange="this.form.submit()"/>
+                        <input type="hidden" name="token" value="{{.token}}">
+                    </form>
+                    {{end}}
+                    {{if eq .files.Presentation1 0}}
+                    <form style="display: inline;" enctype="multipart/form-data" action="/project/upload_file/part1_presentation" method="post">
+                    <button type="button" class="btn btn-outline-primary" id="clickme6">
+                        <span class="glyphicon glyphicon-open" aria-hidden="true"></span> 'הגשת מצגת חלק א</button>
+                        <input type="file" name="File" id="uploadme6" style="width: 0px; height: 0px; visibility: hidden; display: inline;" onchange="this.form.submit()"/>
+                        <input type="hidden" name="token" value="{{.token}}">
+                    </form>
+                    {{end}}
+                {{end}}
+            {{end}}
+            <a title="סרגל התקדמות" class="btn btn-outline-primary btn-space" role="button" href="/progressbar">
+                <span class="fas fa-tasks" aria-hidden="true"></span> סרגל התקדמות</a>
+        {{end}}
+</div>
+{{template "footer" .}}
+<script>
+$(function(){
+    $('#clickme').click(function(){
+        $('#uploadme').click();
+    });
+});
+$(function(){
+    $('#clickme1').click(function(){
+        $('#uploadme1').click();
+    });
+});
+$(function(){
+    $('#clickme2').click(function(){
+        $('#uploadme2').click();
+    });
+});
+$(function(){
+    $('#clickme3').click(function(){
+        $('#uploadme3').click();
+    });
+});
+$(function(){
+    $('#clickme4').click(function(){
+        $('#uploadme4').click();
+    });
+});
+$(function(){
+    $('#clickme5').click(function(){
+        $('#uploadme5').click();
+    });
+});
+$(function(){
+    $('#clickme6').click(function(){
+        $('#uploadme6').click();
+    });
+});
+</script>
+{{end}}
+{{define "foot"}}{{end}}

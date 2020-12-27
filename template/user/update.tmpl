@@ -1,0 +1,43 @@
+{{define "title"}}Update a contact information{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+	<div class="page-header">
+		<h1 align="right">עדכון פרטי משתמש</h1>
+	</div>
+	<form method="post">
+	    <div class="form-group">
+			<label for="firstname">שם פרטי</label>
+			<div><input type="text" class="form-control" id="firstname" name="firstname" maxlength="48" placeholder="שם פרטי" required value="{{.firstname}}"/></div>
+		</div>
+		<div class="form-group">
+        	<label for="lastname">שם משפחה</label>
+        	<div><input type="text" class="form-control" id="lastname" name="lastname" maxlength="48" placeholder="שם משפחה" required value="{{.lastname}}" /></div>
+        </div>
+        <div class="form-group">
+            <label for="telephone">טלפון</label>
+            <div><input type="tel" pattern="[0-9]{10}" class="form-control" id="telephone" name="telephone" maxlength="48" placeholder="טלפון" value="0{{.telephone}}"/></div>
+        </div>
+        <div class="form-group">
+           	<label for="facebook">פייסבוק</label>
+           	<div><input type="url" pattern="(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/.*" class="form-control" id="facebook" name="facebook" maxlength="48" placeholder="Facebook" value="{{.facebook}}" /></div>
+        </div>
+        <div class="form-group">
+            <label for="twitter">טוויטר</label>
+            <div><input type="url" pattern="(?:(?:http|https):\/\/)?(?:www.)?twitter.com\/.*" class="form-control" id="twitter" name="twitter" maxlength="48" placeholder="Twitter" value="{{.twitter}}" /></div>
+        </div>
+        <div class="form-group">
+           	<label for="telegram">טלגרם</label>
+           	<div><input type="url" pattern="(?:(?:http|https):\/\/)?t.me\/.*" class="form-control" id="telegram" name="telegram" maxlength="48" placeholder="Telegram" value="{{.telegram}}" /></div>
+        </div>
+        <input type="submit" value="עדכון פרטים" class="btn btn-outline-primary" />
+        <input type="hidden" name="token" value="{{.token}}">
+        <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+	</form>
+
+	{{template "footer" .}}
+</div>
+
+{{end}}
+{{define "foot"}}{{end}}

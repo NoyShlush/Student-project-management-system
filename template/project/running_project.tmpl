@@ -1,0 +1,47 @@
+{{define "title"}}רשימת פרויקטים זמינים{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+<h1 align="right">:רשימת פרויקטים זמינים </h1>
+<br>
+<p align="right">בעמוד זה תוכל למצאו פרוייקטים אשר כבר רצים </p>
+<br>
+<!-- Search form -->
+<div class="row">
+	<div class="col-sm-8">
+        <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+	</div>
+	<div class="col-sm-4">
+        <form method="post" class="form-inline mr-auto">
+            <button class="btn btn-outline-primary" type="submit">חיפוש</button>
+            <input id="query" name = "query" class="form-control mr-sm-2" type="text" placeholder="חיפוש" aria-label="Search" dir="rtl">
+            <input type="hidden" name="token" value="{{.token}}">
+         </form>
+	</div>
+</div>
+<br>
+{{if .projects}}
+{{range $n := .projects}}
+  <div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading" align="right">{{.ProjectName}}</div>
+            <div class="panel-body">
+                <p dir="rtl"><span class="fa fa-users"></span> {{.Description}}</p>
+                <p dir="rtl">{{.ShortDescription}}</p>
+                <a title="פרטים נוספים" class="btn btn-outline-primary btn-space" role="button" href="/project/more/{{.ID}}">
+                <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> פרטים נוספים</a>
+                <a title="סרגל התקדמות" class="btn btn-outline-primary btn-space" role="button" href="/progressbar/progressbar/{{.ID}}">
+                <span class="fas fa-tasks" aria-hidden="true"></span> סרגל התקדמות</a>
+	        </div>
+        </div>
+  </div>
+{{end}}
+{{else}}
+    <h1 align="center"><i>רשימה ריקה </i></h1>
+{{end}}
+</div>
+</div>
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

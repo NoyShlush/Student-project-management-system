@@ -1,0 +1,45 @@
+{{define "title"}}Update an User{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+    <h1 align="right">{{.project.ProjectName}}</h1>
+    <br>
+        <p dir="rtl"><b>מנחה: </b><span class="glyphicon glyphicon-user"></span>{{.supervisors.FirstName}} {{.supervisors.LastName}}</p>
+        {{if .project_students}}
+        <p dir="rtl"><b>סטודנטים: </b><span class="fa fa-users"></span>
+        {{(index .project_students 0).FirstName}} {{(index .project_students 0).LastName}}
+        ו{{(index .project_students 1).FirstName}} {{(index .project_students 1).LastName}}
+        </p>
+        {{end}}
+        <p dir="rtl"><b>תיאור קצר:</b></p>
+        <p dir="rtl">{{.project.ShortDescription}}</p>
+        <p dir="rtl"><b>תיאור הפרויקט:</b></p>
+        <p dir="rtl">{{.project.Description}}</p>
+
+        <p dir="rtl"><b>נוצר ב: </b></span> {{.createdat}}</p>
+        <p dir="rtl"><b>עודכן ב: </b></span> {{.updatedat}}</p>
+        <br>
+	    <div class="row" align="right" >
+	        <div class="col-sm-1"></div>
+            <div class="col-sm-11">
+            <a title="קבצי קוד" class="btn btn-outline-primary btn-space" role="button" href="{{.SourceCode.Link}}">
+                <span class="fas fa-code" aria-hidden="true"></span> קבצי קוד</a>
+            <a title="'ספר חלק א" class="btn btn-outline-primary btn-space" role="button" href="{{.Book1PDF.Link}}">
+                <span class="fas fa-file-pdf" aria-hidden="true"></span> 'ספר חלק א</a>
+            <a title="'ספר חלק א" class="btn btn-outline-primary btn-space" role="button" href="{{.Book1WORD.Link}}">
+                <span class="fas fa-file-word" aria-hidden="true"></span> 'ספר חלק א</a>
+            <a title="'ספר חלק ב" class="btn btn-outline-primary btn-space" role="button" href="{{.Book2PDF.Link}}">
+                <span class="fas fa-file-pdf" aria-hidden="true"></span> 'ספר חלק ב</a>
+            <a title="'ספר חלק ב" class="btn btn-outline-primary btn-space" role="button" href="{{.Book2WORD.Link}}">
+                <span class="fas fa-file-word" aria-hidden="true"></span> 'ספר חלק ב</a>
+            <a title="'מצגת חלק א" class="btn btn-outline-primary btn-space" role="button" href="{{.Presentation1.Link}}">
+                <span class="fas fa-file-powerpoint" aria-hidden="true"></span> 'מצגת חלק א</a>
+            <a title="'מצגת חלק ב" class="btn btn-outline-primary btn-space" role="button" href="{{.Presentation2.Link}}">
+                <span class="fas fa-file-powerpoint" aria-hidden="true"></span> 'מצגת חלק ב</a>
+            <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+        </div>
+</div>
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

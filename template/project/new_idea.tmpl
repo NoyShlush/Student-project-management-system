@@ -1,0 +1,60 @@
+{{define "title"}}טופס הצעת רעיון{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+<h1 align="right">:טופס הצעת רעיון </h1>
+<br>
+<!-- Search form -->
+<form method="post">
+<p dir="rtl"><b>שם הפרויקט: </b></p>
+<div class="row">
+	<div class="col-sm-7"></div>
+	<div class="col-sm-5">
+		<input class="form-control" type="text" placeholder="" id="projectname" name="projectname" required value="{{.projectname}}">
+	</div>
+</div>
+<br>
+<p dir="rtl"><b>תיאור קצר: </b></p>
+<textarea dir="rtl" maxlength="255" class="form-control text-right" rows="3" id="short_description" name="short_description" required value="{{.short_description}}" placeholder="תאר בקצרה את רעיון הפרויקט"></textarea>
+<br>
+<p dir="rtl"><b>תיאור הפרויקט: </b></p>
+<textarea dir="rtl" maxlength="255" class="form-control text-right" rows="4" id="description" name="description" required value="{{.short_description}}" placeholder="תאר את הרעיון של הפרויקט בצורה מפורטת"></textarea>
+<br>
+<div class="row">
+    <div class="col-sm-7">
+
+	</div>
+	<div class="col-sm-5">
+	<select dir="rtl" class="form-control" id="supervisor_id" name="supervisor_id">
+        <option value="" selected disabled>בחר מנחה</option>
+	    {{ range $supervisor := .supervisors }}
+        <option value="{{ $supervisor.ID }}">{{ $supervisor.FirstName }} {{ $supervisor.LastName }}</option>
+        {{ end }}
+	</select>
+	</div>
+	</div>
+	<br>
+  <div class="row">
+    <div class="col-sm-7">
+	</div>
+	<div class="col-sm-5">
+		<select dir="rtl" class="form-control " id="student_id" name="student_id">
+		<option value="" selected disabled>בחר שותף</option>
+	    {{ range $student := .students }}
+        <option value="{{ $student.ID }}">{{ $student.FirstName }} {{ $student.LastName }}</option>
+        {{ end }}
+		</select>
+	</div>
+	</div>
+	<br>
+<button type="submit" class="btn btn-outline-primary"><i class="glyphicon glyphicon-envelope"></i> הצע פרויקט</button>
+<button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+<input type="hidden" name="token" value="{{.token}}">
+</form>
+
+	{{template "footer" .}}
+</div>
+
+{{end}}
+{{define "foot"}}{{end}}

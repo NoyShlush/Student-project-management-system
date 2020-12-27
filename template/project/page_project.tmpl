@@ -1,0 +1,32 @@
+{{define "title"}}עריכת פרויקט{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+<h1 align="right">:עריכת פרויקט </h1>
+<br>
+<form method="post">
+<p dir="rtl"><b>שם הפרויקט: </b></p>
+<div class="row">
+	<div class="col-sm-7"></div>
+	<div class="col-sm-5">
+		<input class="form-control" type="text" placeholder="" id="projectname" name="projectname" required value="{{.project.ProjectName}}">
+	</div>
+</div>
+<br>
+<p dir="rtl"><b>תיאור קצר: </b></p>
+<textarea dir="rtl" maxlength="255" class="form-control text-right" rows="3" id="short_description" name="short_description" required placeholder="תאר בקצרה את רעיון הפרויקט">{{.project.ShortDescription}}</textarea>
+<br>
+<p dir="rtl"><b>תיאור הפרויקט: </b></p>
+<textarea dir="rtl" maxlength="255" class="form-control text-right" rows="4" id="description" name="description" required placeholder="תאר את הרעיון של הפרויקט בצורה מפורטת">{{.project.Description}}</textarea>
+<br>
+<br>
+<input type="hidden" name="token" value="{{.token}}">
+<button type="submit" class="btn btn-outline-primary"><i class="glyphicon glyphicon-pencil"></i> שמור שינוים</button>
+<button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+</form>
+{{template "footer" .}}
+</div>
+
+{{end}}
+{{define "foot"}}{{end}}

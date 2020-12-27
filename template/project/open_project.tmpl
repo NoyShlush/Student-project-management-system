@@ -1,0 +1,66 @@
+{{define "title"}}רשימת פרויקטים זמינים{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+<h1 align="right">:רשימת פרויקטים זמינים </h1>
+<br>
+<p align="right">בעמוד זה תוכל לבחור פרוייקט מרשימת הפרוייקטים שהמרצים הציעו או להציע רעיון שלך לפרוייקט ע"י לחיצה על הוסף רעיון</p>
+<br>
+<!-- Search form -->
+<div class="row">
+	<div class="col-sm-8">
+	    {{if or .is_supervisor .is_project_manager}}
+            <a title="הוסף פרויקט" class="btn btn-outline-primary btn-space" role="button" href="/project/new_project">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> הוסף פרויקט
+            </a>
+            <a title="ממתינים לאישור" class="btn btn-outline-primary btn-space" role="button" href="/project/waiting">
+            <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> ממתינים לאישור
+            </a>
+            {{if .is_project_manager}}
+            <a title="ממתינים לאישור" class="btn btn-outline-primary btn-space" role="button" href="/project/manager_waiting">
+            <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> ממתינים לאישור מנהל
+            </a>
+            {{end}}
+            <a title="פרויקטים רצים" class="btn btn-outline-primary btn-space" role="button" href="/project/running">
+            <span class="fas fa-running" aria-hidden="true"></span> פרויקטים רצים
+            </a>
+        {{else}}
+            <a title="הוסף רעיון" class="btn btn-outline-primary btn-space" role="button" href="/project/new_idea">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> הוסף רעיון
+            </a>
+        {{end}}
+	</div>
+	<div class="col-sm-4">
+        <form method="post" class="form-inline mr-auto">
+            <button class="btn btn-outline-primary" type="submit">חיפוש</button>
+            <input id="query" name = "query" class="form-control mr-sm-2" type="text" placeholder="חיפוש" aria-label="Search" dir="rtl">
+            <input type="hidden" name="token" value="{{.token}}">
+         </form>
+	</div>
+</div>
+<br>
+{{if .projects}}
+{{range $n := .projects}}
+  <div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading" align="right">{{.ProjectName}}</div>
+            <div class="panel-body">
+                <p dir="rtl"><span class="glyphicon glyphicon-user"></span> {{.Description}}</p>
+                <p dir="rtl">{{.ShortDescription}}</p>
+                <a title="פרטים נוספים" class="btn btn-outline-primary btn-space" role="button" href="/project/more/{{.ID}}">
+                <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> פרטים נוספים
+                </a>
+	        </div>
+        </div>
+  </div>
+{{end}}
+{{else}}
+    <h1 align="center"><i>רשימה ריקה </i></h1>
+{{end}}
+</div>
+</div>
+
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

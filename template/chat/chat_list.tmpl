@@ -1,0 +1,45 @@
+{{define "title"}}Chat list{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+<div class="container">
+	<div class="page-header">
+		<h1 align="right">רשימת צ'אטים</h1>
+	</div>
+
+<div class="row">
+    	<div class="col-md-9">
+    	</div>
+    	<div class="col-md-3">
+    		<form method="post" class="form-inline mr-auto">
+              <button class="btn btn-outline-primary" type="submit">חיפוש</button>
+              <input id="query" name = "query" class="form-control mr-sm-2" type="text" placeholder="חיפוש" aria-label="Search" dir="rtl">
+              <input type="hidden" name="token" value="{{.token}}">
+            </form>
+    	</div>
+    </div><br><br>
+{{if .projects}}
+    {{range $n := .projects}}
+		<div class="panel-group">
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                      <div class="row">
+                          <div class="col-md-11">
+                          <a title="Select Chat" class="btn btn-outline-primary" role="button" href="/chat/chat/{{.ID}}">
+                          <span class="far fa-comments" aria-hidden="true"></span> בחר
+                          </a>
+                          </div>
+                          <div class="col-md-1" dir="rtl">
+                              {{.ProjectName}}
+                          </div>
+                      </div>
+              </div>
+            </div>
+        </div>
+	{{end}}
+{{else}}
+    <h1 align="center"><i>רשימה ריקה </i></h1>
+{{end}}
+
+	{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

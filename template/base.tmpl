@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<title>{{template "title" .}}</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="http://www.bootstrapicons.com/files/fa_4.0.3/css/font-awesome.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+      overflow: hidden;
+      background-color: #ffc20e;
+    }
+
+    .topnav a {
+      float: left;
+      color: #0c3c77;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .topnav a:hover {
+      background-color: #0c3c77;
+      color: #ffc20e;
+    }
+
+    .topnav a.active {
+      background-color: #0c3c77;
+      color: #ffc20e;
+    }
+
+    img {
+      padding: 5px;
+      width: 60px;
+      height: 44px;
+    }
+
+    .topnav-right {
+      float: right;
+    }
+
+    .main {
+        height:300px;
+        width:700px;
+        background-color: #FFFFFF;
+        margin: auto;
+    }
+
+    .panel-primary {
+        border-color: #0c3c77;
+    }
+
+    .panel > .panel-heading {
+        background-color: #0c3c77;
+        color: #ffc20e;
+    }
+
+    .btn-space {
+    	margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .btn{
+    	background-color: #0c3c77;
+    	color:#ffc20e;
+    	border-color: #0c3c77;
+    }
+
+    .btn-circle {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      padding: 0;
+      border-radius: 50%;
+    }
+
+    .btn-circle i {
+      position: relative;
+      top: -1px;
+    }
+
+    .btn-circle-sm {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 1.1rem;
+    }
+
+    form {
+        text-align: right;
+    }
+
+    .form-control{
+        align : right;
+    }
+
+    input {
+        text-align: right;
+    }
+
+    .box {
+      width: 800px;
+      border-radius: .6em;
+      padding: 5px 20px 20px 20px;
+      color: #0c3c77;
+      font-family: arial;
+      position: relative;
+    }
+
+    .sb1{
+          background: #FFF3C9;
+          margin-left:auto;
+          margin-right:0;
+          margin-top:10px;
+          margin-bottom:10px;
+    }
+
+    .sb1:before {
+      content: "";
+      text-align: right;
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 10px solid #FFF3C9;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #FFF3C9;
+      border-bottom: 10px solid transparent;
+      right: -19px;
+      top: 10px;
+    }
+
+    .sb2{
+          background: #FFEBA8;
+          margin-left:0;
+          margin-right:auto;
+          margin-top:10px;
+          margin-bottom:10px;
+    }
+
+    .sb2:before {
+      content: "";
+      text-align: left;
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 10px solid transparent;
+      border-right: 10px solid #FFEBA8;
+      border-top: 10px solid #FFEBA8;
+      border-bottom: 10px solid transparent;
+      left: -19px;
+      top: 10px;
+    }
+
+    .time-right {
+      float: right;
+      color: #0c3c77;
+    }
+
+    .time-left {
+      float: left;
+      color: #0c3c77;
+    }
+
+    p.ProgressBarP {
+      text-align: right;
+      font-size: 15px;
+      display: inline-block;
+    }
+
+    .ProgressBarD{
+        text-align: right;
+        margin-left:auto;
+        margin-right:0;
+        margin-bottom: 10px;
+    }
+
+    .progress-bar{
+        background-color:#ffc20e;
+        color: #0c3c77;
+    }
+    </style>
+  </head>
+  <body>
+<div class="topnav">
+  {{if .is_auth}}
+  <a href="/logout">יציאה</a>
+  <a href="/user/update">שלום {{.first_name}}</a>
+  {{else}}
+  <a href="/login">התחבר</a>
+  {{end}}
+  <div class="topnav-right">
+    {{if .is_student}}
+  	<a href="/chat/">צ'אט</a>
+    <a href="/project/projects">פרויקט</a>
+    <a href="/guidline">קבצי הנחיות</a>
+    <a href="/archive">ארכיון</a>
+    {{else if .is_supervisor}}
+  	<a href="/chat/chat_list">צ'אטים</a>
+    <a href="/project/projects">פרויקטים</a>
+    <a href="/guidline">קבצי הנחיות</a>
+    <a href="/archive">ארכיון</a>
+    {{else if .is_project_manager}}
+    <a href="/admin/student_management">ניהול סטודנטים</a>
+    <a href="/admin/supervisor_management">ניהול מנחים</a>
+  	<a href="/chat/chat_list">צ'אטים</a>
+    <a href="/project/projects">פרויקטים</a>
+    <a href="/guidline">קבצי הנחיות</a>
+    <a href="/archive">ארכיון</a>
+    {{else}}
+    <a href="/guidline">קבצי הנחיות</a>
+  	<a href="/archive">ארכיון</a>
+    {{end}}
+    <a href="/">ראשי</a>
+	<img src="/static/images/main_icon.png">
+  </div>
+</div>
+
+	<input id="BaseURI" type="hidden" value="{{.BaseURI}}">
+	<div id="flash-container">
+	{{range $fm := .flashes}}
+		<div id="flash-message" class="alert alert-box-fixed0 alert-box-fixed alert-dismissible {{.Class}}" role="alert" dir="rtl">
+		{{.Message}}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		</div>
+		<!-- <div data-alert id="flash-message" class="alert-box-fixed0 alert-box-fixed {{.Class}}">{{.Message}}<a href="#" class="close">&times;</a></div> -->
+	{{end}}
+	</div>
+
+	{{template "content" .}}
+
+
+	{{template "foot" .}}
+
+  </body>
+</html>

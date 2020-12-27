@@ -1,0 +1,58 @@
+{{define "title"}}Progress Bar{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+	<div class="page-header">
+		<h1 align="right">סרגל התקדמות</h1>
+	</div>
+
+	<div class="row">
+        <div class="col-sm-8">
+            <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+        </div>
+        <div class="col-sm-4">
+        </div>
+    </div>
+    <br><br>
+    <ul class="list-group" style="padding: 0px 60px 0px;" dir="rtl">
+    {{range $n := .progressBar}}
+        <li class="list-group-item">
+            {{if or ($.is_supervisor) ($.is_project_manager)}}
+                <a title="Done" class="btn btn-circle btn-circle-sm m-1" role="button" href="/progressbar/done/{{.ProgressBarId}}/{{.ID}}">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                <a title="Remove" class="btn btn-circle btn-circle-sm m-1" role="button" href="/progressbar/remove/{{.ProgressBarId}}/{{.ID}}">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            {{end}}
+            {{if .Done}}
+                <p class="ProgressBarP"><i style="padding-right: 5px;"><s>{{.Milestone}}</s></i></p>
+            {{else}}
+                <p class="ProgressBarP"><i style="padding-right: 5px;">{{.Milestone}}</i></p>
+            {{end}}
+        </li>
+    {{end}}
+    {{if or ($.is_supervisor) ($.is_project_manager)}}
+    <li class="list-group-item">
+        <form method="post">
+            <div class="row">
+                <div class="col-sm-11">
+                   	<input dir="rtl" class="form-control text-right" required rows="1" id="milestone" name="milestone"></input>
+                </div>
+                <div class="col-sm-1" style="padding-right: 47px;">
+                    <button class="btn btn-circle btn-circle-sm m-1" type="submit"><i class="glyphicon glyphicon-plus"></i></button>
+                    <input type="hidden" name="token" value="{{.token}}">
+                </div>
+            </div>
+        </form>
+    </li>
+    {{end}}
+    </ul>
+    <br><br>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{$.percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$.percentage}}%;"><b>{{$.percentage}}% </b></div>
+    </div>
+</div>
+
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

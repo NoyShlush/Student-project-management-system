@@ -1,0 +1,29 @@
+{{define "title"}}טופס הצעת פרויקט{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+<h1 align="right">:טופס הצעת פרויקט </h1>
+<br>
+<p align="right">.אנא מלא את הטופס באנגלית בהתאם לדרישות</p>
+<br>
+<form method="post">
+<p dir="rtl"><b>תקציר: </b></p>
+<textarea dir="rtl" maxlength="255" class="form-control text-right" rows="3" id="synopses" name="synopses" required placeholder="תאר בקצרה את רעיון הפרויקט">{{.approval_form.Synopses}}</textarea>
+<br>
+<p dir="rtl"><b>היקף הפרויקט: </b></p>
+<textarea dir="rtl" maxlength="255" class="form-control text-right" rows="4" id="scopeoftheproject" name="scopeoftheproject" required placeholder="תאר את הרעיון של הפרויקט בצורה מפורטת">{{.approval_form.ScopeOfTheProject}}</textarea>
+<br>
+<p dir="rtl"><b>תכונות ייחודיות: </b></p>
+<textarea dir="rtl" maxlength="255" class="form-control text-right" rows="3" id="uniquefeatures" name="uniquefeatures" required placeholder="תאר בקצרה את רעיון הפרויקט">{{.approval_form.UniqueFeatures}}</textarea>
+<br>
+<br>
+<input type="hidden" name="token" value="{{.token}}">
+<button type="submit" class="btn btn-outline-primary"><i class="glyphicon glyphicon-pencil"></i> שמור שינוים</button>
+<button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+</form>
+{{template "footer" .}}
+</div>
+
+{{end}}
+{{define "foot"}}{{end}}

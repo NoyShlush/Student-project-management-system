@@ -1,0 +1,55 @@
+{
+	"Database": {
+		"Username": "postgres",
+		"Password": "postgres",
+		"DBName": "postgres",
+		"Hostname": "127.0.0.1"
+	},
+	"AWS": {
+		"Region": "us-east-2",
+		"Bucket": "fs.spms-project.info",
+		"AccessKey": "",
+		"SecretKey": ""
+	},
+	"Email": {
+		"Username": "",
+		"Password": "",
+		"Hostname": "",
+		"Port": 587,
+		"From": ""
+	},
+	"Server": {
+		"Hostname": "",
+		"UseHTTP": true,
+		"UseHTTPS": true,
+		"HTTPPort": 3080,
+		"HTTPSPort": 8443,
+		"CertFile": "tls/cert1.pem",
+		"KeyFile": "tls/privkey1.pem"
+	},
+	"Session": {
+		"SecretKey": "0yhE@#q4*$%uFugE@c5@&67WwM6*un8d",
+		"Name": "spms-session",
+		"Options": {
+			"Path": "/",
+			"Domain": "",
+			"MaxAge": 28800,
+			"Secure": true,
+			"HttpOnly": true
+		}
+	},
+	"Template": {
+		"Root": "base",
+		"Children": [
+			"partial/menu",
+			"partial/footer"
+		]
+	},
+	"View": {
+		"BaseURI": "/",
+		"Extension": "tmpl",
+		"Folder": "template",
+		"Name": "blank",
+		"Caching": true
+	}
+}

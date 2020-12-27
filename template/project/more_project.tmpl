@@ -1,0 +1,82 @@
+{{define "title"}}Update an User{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+    <h1 align="right">{{.project.ProjectName}}</h1>
+    <br>
+        <p dir="rtl"><b>מנחה: </b><span class="glyphicon glyphicon-user"></span>{{.supervisors.FirstName}} {{.supervisors.LastName}}</p>
+        {{if .project_students}}
+        <p dir="rtl"><b>סטודנטים: </b><span class="fa fa-users"></span>
+        {{(index .project_students 0).FirstName}} {{(index .project_students 0).LastName}}
+        ו{{(index .project_students 1).FirstName}} {{(index .project_students 1).LastName}}
+        </p>
+        {{end}}
+        <p dir="rtl"><b>סטטוס פרויקט:</b>
+            {{if eq .project.StatusId 1}}
+            זמין
+            {{else if eq .project.StatusId 2}}
+            ממתין לאישור מנחה
+            {{else if eq .project.StatusId 3}}
+            ממתין לאישור מנהל פרויקטים
+            {{end}}
+        </p>
+        <p dir="rtl"><b>תיאור קצר:</b></p>
+        <p dir="rtl">{{.project.ShortDescription}}</p>
+        <p dir="rtl"><b>תיאור הפרויקט:</b></p>
+        <p dir="rtl">{{.project.Description}}</p>
+        {{if .approvalform}}
+        <br>
+        <h3 align="right">:טופס הצעת פרויקט</h3>
+        <p dir="rtl"><b>תקציר:</b></p>
+        <p dir="rtl">{{.approvalform.Synopses}}</p>
+        <p dir="rtl"><b>היקף הפרויקט:</b></p>
+        <p dir="rtl">{{.approvalform.ScopeOfTheProject}}</p>
+        <p dir="rtl"><b>תכונות ייחודיות:</b></p>
+        <p dir="rtl">{{.approvalform.UniqueFeatures}}</p>
+        <br>
+        {{end}}
+        {{if .comments }}
+        <div class="row">
+            <div class="col-sm-7"></div>
+            <div class="col-sm-5">
+            <p dir="rtl"><b>הערות:</b></p>
+            {{ range $comment := .comments }}
+            <p dir="rtl">{{$comment }}</p>
+            {{ end }}
+            </div>
+        </div>
+        <br>
+        {{end}}
+        <p dir="rtl"><b>נוצר ב: </b></span> {{.createdat}}</p>
+        <p dir="rtl"><b>עודכן ב: </b></span> {{.updatedat}}</p>
+        <br>
+        {{if .is_student}}
+                <form method="post">
+                <div class="row">
+                    <div class="col-sm-7"></div>
+        	        <div class="col-sm-5">
+        			    <select dir="rtl" class="form-control " id="student_id" name="student_id">
+                        <option value="" selected disabled>בחר שותף</option>
+                        {{ range $student := .students }}
+                        <option value="{{ $student.ID }}">{{ $student.FirstName }} {{ $student.LastName }}</option>
+                        {{ end }}
+                        </select>
+        	        </div>
+        	    </div>
+                <br>
+        <button type="submit" class="btn btn-outline-primary"><i class="glyphicon glyphicon-envelope"></i> הגש הצעה לפרויקט</button>
+        <input type="hidden" name="token" value="{{.token}}">
+        <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+        </form>
+        {{else}}
+	    <div class="row" >
+            <div class="col-sm-11"></div>
+            <div class="col-sm-1">
+            <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+        </div>
+        {{end}}
+</div>
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

@@ -1,0 +1,58 @@
+{{define "title"}}רשימת פרויקטים ממתינים לאישור{{end}}
+{{define "head"}}{{end}}
+{{define "content"}}
+
+<div class="container">
+<h1 align="right">:רשימת פרויקטים ממתינים לאישור מנהל </h1>
+<br>
+<p align="right">זוהי רשימת הפרויקטים המחכים לאישורך</p>
+<br>
+<!-- Search form -->
+<div class="row">
+	<div class="col-sm-8">
+        <button type="button" class="btn btn-outline-primary" onclick="history.back()"><i class="glyphicon glyphicon-share-alt"></i> חזרה</button>
+	</div>
+	<div class="col-sm-4">
+        <form method="post" class="form-inline mr-auto">
+            <button class="btn btn-outline-primary" type="submit">חיפוש</button>
+            <input id="query" name = "query" class="form-control mr-sm-2" type="text" placeholder="חיפוש" aria-label="Search" dir="rtl">
+            <input type="hidden" name="token" value="{{.token}}">
+         </form>
+	</div>
+</div>
+<br>
+{{if .projects}}
+{{range $n := .projects}}
+  <div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading" align="right">{{.ProjectName}}</div>
+            <div class="panel-body">
+                <p dir="rtl"><span class="fa fa-users"></span> {{.Description}}</p>
+                <p dir="rtl">{{.ShortDescription}}</p>
+                {{if .FormId}}
+                <a title="פרטים נוספים" class="btn btn-outline-primary btn-space" role="button" href="/project/manager_approved/{{.ID}}">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> אישור
+                </a>
+                <a title="פרטים נוספים" class="btn btn-outline-primary btn-space" role="button" href="/project/manager_declined/{{.ID}}">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> דחיה
+                </a>
+                <a title="פרטים נוספים" class="btn btn-outline-primary btn-space" role="button" href="/project/approval_add_comments/{{.ID}}">
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> הוסף הערות
+                </a>
+                {{end}}
+                <a title="פרטים נוספים" class="btn btn-outline-primary btn-space" role="button" href="/project/more/{{.ID}}">
+                <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> פרטים נוספים
+                </a>
+	        </div>
+        </div>
+  </div>
+{{end}}
+  {{else}}
+    <h1 align="center"><i>רשימה ריקה </i></h1>
+
+  {{end}}
+</div>
+</div>
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}
