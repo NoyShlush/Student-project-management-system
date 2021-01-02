@@ -138,10 +138,10 @@ This is config.json:
 ## Maintainers
 
 This project is mantained by:
-* [Noy Shlush](https://github.com/NoySlush)
+* [Noy Shlush](https://github.com/NoyShlush)
 * [Nofar Shmilovich](https://github.com/NofarShmil)
 
 
 ## Video
 
-TBD
+[![SPMS Video](https://yt-embed.herokuapp.com/embed?v=N5_xTTRaE3g)](https://www.youtube.com/watch?v=N5_xTTRaE3g "SPMS")
