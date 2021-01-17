@@ -1,5 +1,9 @@
 # Student project management system
 
+AWS based web application that allows students, supervisor and project manager to orchestrate  all operations that are necessary for the students during the final project and makes the whole flow transparent and easier.
+
+## Background
+
 Students in their final year are required to characterize and develop their final project. The final project serves as a reflection of the knowledge they have accumulated during their studies and demonstrate their skills.
 This project is the most significant challenge of the degree and requires a lot of effort, work, self-learning, thinking, sleepless nights, and sometimes quite a few nerves. Also, sometimes the students are required to present their final project in job interviews, and it can affect their acceptance into a desirable work that they have dreamed so long.
 
@@ -27,7 +31,7 @@ I have obtained the following knowledge, technologies, and tools:
 	* Route 53
 	* SNS
 
-## During the project development I focused on the following items:
+## System features:
 
 * **Projects archive** – The SPMS stores all completed projects on the AWS S3. Any students can access the project archive and see projects. 
 * **Improve the existing approval process** – The SPMS provides a fully managed process through the system by using web forms. The students can choose a project which has been proposed by the supervisor or offer their ideas. 
@@ -51,12 +55,6 @@ AWS services are costly, so we choose the most chipper EC2 server and RDS databa
 4. Run the project.
 
 ## Structure
-
-Recently, the folder structure changed. After looking at all the forks 
-and reusing my project in different places, I decided to move the Go code to the 
-**app** folder inside the **vendor** folder so the github path is not littered 
-throughout the many imports. I did not want to use relative paths so the vendor
-folder seemed like the best option.
 
 The project is organized into the following folders:
 
